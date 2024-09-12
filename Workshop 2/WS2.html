@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-
-<head <head>
+<html lang="en">
+<head>
     <meta charset="UTF-8">
     <title>Workshop 2</title>
     <link rel="stylesheet" href="css/styles.css">
@@ -10,54 +10,56 @@
     <h1>Workshop 2: JavaScript BOM</h1>
 
     <hr />
-    <p id="quote" ></p>
     <p><strong>Exercise 1</strong></p>
-    <p>Add JavaScript commands (or create separate folder and file for your scripts) in the script-tag of this page,
-        which will write
-        the following text on the browser page. Use HTML-tags to produce the
-        text styles to the page.
-    </p>
-    <p><strong><i>&quot;If I had nine hours to chop down a tree, I&#39;d spend the first six
-                sharpening my ax.&quot;</i></strong>
-        <br>
-        -- Abraham Lincoln
-    </p>
+    <p id="quote"></p>
     <p><strong>Exercise 2</strong></p>
-    <p>Create a JavaScript function called repeatingText. It writes out a line
-        of text to the page 50 times.</p>
+    <p id="output"></p>
     <p><strong>Exercise 3</strong></p>
-    <p>Create a JavaScript if-statement, which checks if the user is using
-        Mozilla browser. If it is, the browser should load
-        &quot;<a href="http://www.mozilla.org">http://www.mozilla.org</a>&quot; page. If not, the browser should load
-        some
-        other website. Create simple pages to test the code.</p>
-    <p><strong>Exercise 4</strong></p>
-    <p>Create a simple web page, where JavaScript confirm-dialog will pop out
-        asking if the user is a student or not. If the user clicks OK write
-        \&quot;Welcome student\&quot; to the page. If the user clicks cancel, write on the
-        page: \&quot;Sorry, this page is for students only\&quot;.</p>
-    <p><strong>Exercise 5</strong></p>
-    <p>Use document.write to output an image tag with a real image to the page.
-        When you\&#39;re done, try writing a JavaScript function to display a random
-        image from the following list of images. HINT: You can access individual
-        images using the table index. Images[0] for example contains the url:
-        &quot;<a
-            href="http://farm4.staticflickr.com/3691/11268502654_f28f05966c_m.jpg">http://farm4.staticflickr.com/3691/11268502654_f28f05966c_m.jpg</a>&quot;.
-    </p>
     <p>
-
-    <pre><code>
-            <span>var images</span> =[
-            <span>"http://farm4.staticflickr.com/3691/11268502654_f28f05966c_m.jpg"</span>,
-            <span>"http://farm1.staticflickr.com/33/45336904_1aef569b30_n.jpg"</span>,
-            <span>"http://farm6.staticflickr.com/5211/5384592886_80a512e2c9.jpg"</span>
-            ];
-        </code></pre>
+        <button onclick="checkBrowser()">Browser Check</button>
     </p>
+    <p><strong>Exercise 4</strong></p>
+    <button onclick="window.location.href='studentcheck.html';">
+    Stud Check</button>
+    <p><strong>Exercise 5</strong></p>
+        <div id="randoimg"></div>
 
     <script>
         document.getElementById("quote").innerHTML = "If I had nine hours to chop down a tree, I'd spend the first six sharpening my ax.<br>-- Abraham Lincoln";
-        <!-- JavaScript goes her 
-            preferably create a new folder (script) and add your script file in it (script.js). Then link (src = "<filename>") your *.js file here -->
+        
+        function repeatingText(text, times) {
+            const outputElement = document.getElementById("output");
+            for (let i = 0; i < times; i++) {
+                outputElement.innerHTML += text + "<br>";
+            }
+        }
+        repeatingText("Repeat for 50 times", 50);
+        function checkBrowser() {
+            const userAgent = navigator.userAgent.toLowerCase();
+            if (userAgent.includes("firefox")) {
+                window.location.href = "http://www.mozilla.org";
+            } else {
+                window.location.href = "http://youtube.com";
+            }
+        }
+        var images =[
+            "http://farm4.staticflickr.com/3691/11268502654_f28f05966c_m.jpg",
+            "http://farm1.staticflickr.com/33/45336904_1aef569b30_n.jpg",
+            "http://farm6.staticflickr.com/5211/5384592886_80a512e2c9.jpg"
+        ];
+
+        function displayRandomImage() {
+            var imageContainer = document.getElementById('randoimg');
+            if (imageContainer) {
+                var randomIndex = Math.floor(Math.random() * images.length);
+                console.log('Random Index:', randomIndex);
+                var randomImage = images[randomIndex];
+                console.log('Random Image URL:', randomImage);
+                imageContainer.innerHTML = '<img src="' + randomImage + '" alt="Random Image">';
+            } else {
+                console.error('Element with id "randoimg" not found.');
+            }
+        }
+        displayRandomImage();
     </script>
 </body>
