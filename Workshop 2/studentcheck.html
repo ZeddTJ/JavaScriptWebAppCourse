@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Workshop 2</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+    <div id="message"></div>
+    <script>
+        const isStudent = confirm("Are you a student?");
+        
+        const messageElement = document.getElementById("message");
+        if (isStudent) {
+            messageElement.innerHTML = "Welcome student";
+        } else {
+            messageElement.innerHTML = "Sorry, this page is for students only";
+        }
+
+    </script>
+</body>
